@@ -13,7 +13,7 @@ Example:
 
 ```bash
 pwd
-bash```
+
 the result will give us something like this:- /home/user/Desktop/
 
 ### ls
