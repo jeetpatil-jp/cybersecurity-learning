@@ -6,6 +6,16 @@
 
 ### pwd
 
+`pwd` stands for **Print Working Directory**.
+
+It is used when we want to know our current working directory. It is useful when we want to know the exact path of the directory we are currently working on. 
+Example:
+
+```bash
+pwd
+
+the result will give us something like this:- /home/user/Desktop/
+
 ### ls
 
 ### cd
