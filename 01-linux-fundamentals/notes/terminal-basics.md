@@ -402,6 +402,153 @@ This can match `filea.txt`, `fileb.txt` and `filec.txt`.
 
 An important thing I learned is that `[ ]` matches **one character**, unlike `*`, which can match zero or more characters.
 
+# history
+
+`history` is a command that lets you see the commands you previously used in the terminal. It is useful because you can find and reuse previous commands instead of typing everything again.
+
+For example:
+
+```bash
+history
+```
+
+This will show previous commands along with their history numbers.
+
+## Using the Up and Down Arrow
+
+We can use the **up arrow (`↑`)** and **down arrow (`↓`)** to navigate through our command history.
+
+The up arrow moves backward through previous commands, while the down arrow moves forward again.
+
+For example, if we recently used:
+
+```text
+pwd
+ls
+mkdir test
+cd test
+```
+
+pressing `↑` will first give us:
+
+```bash
+cd test
+```
+
+pressing it again gives:
+
+```bash
+mkdir test
+```
+
+This is useful, but if we want to find a command from much further back, pressing the arrow repeatedly can be inconvenient.
+
+## Ctrl + R
+
+There is an easier way to search through command history:
+
+```text
+Ctrl + R
+```
+
+`Ctrl + R` performs a **reverse history search**.
+
+After pressing `Ctrl + R`, we can type a search term. Bash searches backward through our previous commands and shows the most recent command that contains that search term.
+
+For example:
+
+```text
+Ctrl + R
+cd
+```
+
+Bash may find:
+
+```bash
+cd Documents
+```
+
+If this is the command we want, we can press Enter to execute it.
+
+If it is not the command we want, we can press `Ctrl + R` again to search further back for another command containing `cd`.
+
+## History Numbers
+
+Every command in the history has a number.
+
+For example:
+
+```text
+101  pwd
+102  ls
+103  mkdir project
+```
+
+We can use the history number to execute a previous command:
+
+```bash
+!103
+```
+
+This will execute:
+
+```bash
+mkdir project
+```
+
+Because `!103` tells Bash to execute history entry number 103.
+
+We should be careful with this because it immediately executes the old command.
+
+## Root Shell and History
+
+When we work as a normal user, our Bash history is normally associated with that user's home directory, commonly:
+
+```text
+~/.bash_history
+```
+
+When we enter a separate root shell, root has its own home directory:
+
+```text
+/root
+```
+
+and Bash history is commonly stored in:
+
+```text
+/root/.bash_history
+```
+
+Therefore, commands executed inside the root shell can be stored in root's history rather than in the normal user's history.
+
+For example:
+
+```bash
+sudo -i
+```
+
+starts a root shell. Commands executed after entering that shell are being executed by root and can be recorded in root's history, depending on the shell configuration.
+
+This is different from simply running:
+
+```bash
+sudo ls /root
+```
+
+because in that case we are still using our normal user's shell. The command itself can therefore appear in our normal user's history.
+
+## Security Consideration
+
+Command history can contain sensitive information if we put secrets directly into commands.
+
+For example, a command containing a password, token, or other credential could potentially be stored in shell history.
+
+This means command history is not only a convenience feature; it can also become a security concern.
+
+Also, deleting shell history does not necessarily erase all evidence of an action because systems can have other records such as authentication logs, application logs, audit logs, and network logs.
+
+
 ## What I Have Learned So Far
 
 The main thing I have learned from these commands is how to navigate the Linux filesystem and perform basic operations from the terminal.
@@ -422,5 +569,6 @@ I can now:
 - Check the system name using `hostname`.
 - Get system information using `uname -a`.
 - Use Bash wildcards such as `*`, `?` and `[]` to work with multiple filenames.
+- Navigate through the terminal history using arrows or 'ctrl + R'
 
 These are basic commands, but understanding them properly is important because the Linux terminal will be used much more later when I start learning cybersecurity and ethical hacking.
